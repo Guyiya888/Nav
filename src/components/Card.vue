@@ -42,7 +42,8 @@
   100% { border-color: rgba(216, 180, 254, 0.5); }
 }
 
-.dark .card-container:hover {
+/* 修复黑暗模式样式 - 使用全局选择器 */
+:global(.dark) .card-container:hover {
   animation: borderPulseDark 2s infinite;
 }
 

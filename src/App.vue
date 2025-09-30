@@ -98,14 +98,26 @@ export default {
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
-      console.log('黑暗模式切换，当前状态：', this.darkMode);
+      console.log('=== 黑暗模式切换 ===');
+      console.log('当前状态：', this.darkMode);
+      console.log('切换前class列表：', document.documentElement.className);
+      
       if (this.darkMode) {
         document.documentElement.classList.add('dark');
+        console.log('已添加dark类');
       } else {
         document.documentElement.classList.remove('dark');
+        console.log('已移除dark类');
       }
-      console.log('根元素class列表：', document.documentElement.className);
+      
+      console.log('切换后class列表：', document.documentElement.className);
+      console.log('localStorage保存状态：', this.darkMode);
       localStorage.setItem('darkMode', this.darkMode);
+      
+      // 强制重新应用样式
+      this.$nextTick(() => {
+        console.log('强制重绘完成');
+      });
     },
     toggleSidebar() {
       this.isSidebarCollapsed = !this.isSidebarCollapsed;
@@ -136,8 +148,15 @@ export default {
   },
   created() {
     this.loadData();
+    // 确保黑暗模式状态正确初始化
+    console.log('App.vue创建时黑暗模式状态：', this.darkMode);
   },
   mounted() {
+    // 初始化黑暗模式
+    if (this.darkMode) {
+      document.documentElement.classList.add('dark');
+    }
+    
     // 初始化列数设置
     const savedColumns = localStorage.getItem('columns')
     if (savedColumns) {
