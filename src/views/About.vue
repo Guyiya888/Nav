@@ -15,7 +15,7 @@
                 <i class="fas fa-rocket text-blue-500 text-xl mb-2"></i>
                 <h3 class="text-xl font-semibold mb-2">项目简介</h3>
                 <p class="text-gray-600 dark:text-gray-300">
-                  一个简洁高效的导航站点，全AI开发，导航数据从维基云表格获取。以自己的使用习惯来开发。
+                  一个简洁的导航站点，导航数据从维基云表格获取。
                 </p>
                 <p> 
                   <a 
@@ -64,29 +64,29 @@
               <i class="fas fa-user-circle text-red-500 text-xl mb-2"></i>
               <h3 class="text-xl font-semibold mb-2">关于作者</h3>
               <div class="text-gray-600 dark:text-gray-300 space-y-2">
-                <p>🕴️ 开发者：水常（Shui Chang）</p>
-                <p>🚀 带娃建筑师 | AI技术学习者 | 个人博主</p>
+                <p>🕴️ 开发：</p>
+                <p>🚀</p>
                 <p>🏠 个人主页： 
                   <a 
-                    href="https://jianzhugo.cn" 
+                    href="xx" 
                     target="_blank"
                     class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 underline"
                   >
-                    水常@Shui Chang
+                    GUYI@
                   </a>
                 </p>
                 <p>🌐 个人博客： 
                   <a 
-                    href="https://blog.jianzhugo.cn" 
+                    href="XXX" 
                     target="_blank"
                     class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 underline"
                   >
-                    建筑G博客
+                    博客
                   </a>
                 </p>
-                <p>💰 另一AI网页成品： 
+                <p>💰 另一网页： 
                   <a 
-                    href="https://donate.jianzhugo.cn" 
+                    href="https://baidu.com" 
                     target="_blank"
                     class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 underline"
                   >
@@ -102,7 +102,7 @@
               <h3 class="text-xl font-semibold mb-2">数据统计</h3>
               <div class="grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <div class="text-2xl font-bold text-blue-500">105个</div>
+                  <div class="text-2xl font-bold text-blue-500">99个</div>
                   <div class="text-sm text-gray-500">收录网站</div>
                 </div>
                 <div>
@@ -110,7 +110,7 @@
                   <div class="text-sm text-gray-500">可用性监测</div>
                 </div>
                 <div>
-                  <div class="text-2xl font-bold text-green-500">2025-05-14</div>
+                  <div class="text-2xl font-bold text-green-500">2025-10-15</div>
                   <div class="text-sm text-gray-500">手动更新</div>
                 </div>
               </div>
