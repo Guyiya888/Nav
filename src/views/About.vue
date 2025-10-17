@@ -7,7 +7,7 @@
             class="text-3xl font-bold mb-6 text-center text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors cursor-pointer"
             @click="$router.push('/')"
           >
-            关于 Simple NAV
+            关于 GUYI NAV
           </h1>
           <div class="prose dark:prose-invert">
             <div class="grid grid-cols-2 gap-6 mb-8">
@@ -19,14 +19,14 @@
                 </p>
                 <p> 
                   <a 
-                    href="https://vika.cn/share/shrxaWuBbbn6cKWBwvXgV" 
+                    href="https://vika.cn/share/shreDtmrPDnN87neZss2x/dstgUzq40yGM6H6Szn/viwq8iJ09CMn9" 
                     target="_blank"
                     class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 underline"
                   >
                     维基云表格地址
                   </a> |                   
                   <a 
-                    href="https://vika.cn/workbench/fomWQp8Fd6lHE5CBKl/viwullRf3ubdS?fldM5GkwwsOFh=%2Fdefault.ico&fldXKVGVmpAnY=%E6%9D%82%E9%A1%B9%E5%B7%A5%E5%85%B7" 
+                    href="https://vika.cn/workbench/dstgUzq40yGM6H6Szn/viwq8iJ09CMn9" 
                     target="_blank"
                     class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 underline"
                   >
@@ -52,8 +52,9 @@
               <h3 class="text-xl font-semibold mb-2">功能特点</h3>
               <ul class="list-disc pl-4 text-gray-600 dark:text-gray-300">
                 <li>智能本地搜索功能</li>
+                <li>全AI智能开发部署</li>
                 <li>响应式侧边栏布局</li>
-                <li>黑暗模式自动适配（有bug还没实现）</li>                  
+                <li>黑暗模式自动适配</li>                  
                 <li>多分类资源管理</li>
                 <li>从维基云表格获取数据，无需数据库</li>
               </ul>
@@ -102,7 +103,7 @@
               <h3 class="text-xl font-semibold mb-2">数据统计</h3>
               <div class="grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <div class="text-2xl font-bold text-blue-500">99个</div>
+                  <div class="text-2xl font-bold text-blue-500">50个</div>
                   <div class="text-sm text-gray-500">收录网站</div>
                 </div>
                 <div>
