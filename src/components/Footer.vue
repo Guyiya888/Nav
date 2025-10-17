@@ -4,7 +4,7 @@
       <span class="text-purple-600">GUYI</span> 
     </div>
     <div>已稳定运行: {{ uptime }}</div> 
-    <div><a href="http://beian.miit.gov.cn/" rel="nofollow" target="_blank"> 闽ICP备xxx号-1 </a></div>
+    //<div><a href="http://beian.miit.gov.cn/" rel="nofollow" target="_blank"> 闽ICP备xxx号-1 </a></div>
   </footer>
 </template>
 
