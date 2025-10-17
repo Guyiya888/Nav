@@ -104,7 +104,7 @@ export default {
     getCategoryIcon(category) {
       const iconMap = {
         '在线工具': 'fa-solid fa-wrench',
-        '个人博客': 'fa-solid fa-blog',
+        '狂隆欢': 'fa-solid fa-layer-group',
         '影视在线': 'fa-solid fa-film',
         'AI大模型': 'fa-solid fa-fire',
         '网络存储': 'fa-solid fa-cloud',
