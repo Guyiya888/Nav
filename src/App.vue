@@ -123,17 +123,17 @@ export default {
       this.isSidebarCollapsed = !this.isSidebarCollapsed;
     },
     // 可以移除的冗余代码
-    handleGlobalClick(event) {
+    //handleGlobalClick(event) {
     // 改用document.querySelector获取元素
-    const sidebar = document.querySelector('.sidebar-container');
-    const cards = document.querySelectorAll('.card-container');
-    
+    //const sidebar = document.querySelector('.sidebar-container');
+    //const cards = document.querySelectorAll('.card-container');
+    //
     // 只重置分类，不影响样式
-    if (!sidebar.contains(event.target) && 
-        !Array.from(cards).some(card => card.contains(event.target))) {
-    this.selectedCategory = null;
-    }
-    },
+    //if (!sidebar.contains(event.target) && 
+    //    !Array.from(cards).some(card => card.contains(event.target))) {
+    //this.selectedCategory = null;
+    //}
+    //},
     handleResize() {
       // 强制移动端侧边栏保持收起状态
       this.isSidebarCollapsed = window.innerWidth < 768
@@ -178,7 +178,7 @@ export default {
     // 添加窗口大小变化监听
     window.addEventListener('resize', this.handleResize)
     // 确保正确添加事件监听
-    document.addEventListener('click', this.handleGlobalClick);
+    //document.addEventListener('click', this.handleGlobalClick);
     // 初始化时应用移动端状态
     if (window.innerWidth < 768) {
       this.isSidebarCollapsed = true
@@ -186,7 +186,7 @@ export default {
   },
   beforeUnmount() {
     // 移除事件监听
-    document.removeEventListener('click', this.handleGlobalClick);
+    //document.removeEventListener('click', this.handleGlobalClick);
     // 移除窗口大小变化监听
     window.removeEventListener('resize', this.handleResize);
   }
