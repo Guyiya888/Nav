@@ -14,7 +14,7 @@
         <router-link 
           to="/"
           @click.native="resetCategory">
-         <i class="fas fa-globe text-purple-500 text-base"></i>
+         <i class="fa-solid fa-list text-purple-500 text-base"></i>
         </router-link>
         <!-- 添加 router-link 实现跳转 -->
         <router-link 
