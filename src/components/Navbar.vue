@@ -2,7 +2,7 @@
   <nav class="h-12 sticky top-0 z-30 bg-white dark:bg-gray-800 shadow-md px-4 py-2 flex justify-between items-center">
     <!-- 修改为 router-link 以实现跳转 -->
     <router-link to="/" class="text-xl font-bold text-blue-500">
-      <i class="fa-light fa-user-secret"></i> GUYI导航站
+      <i class="fa-solid fa- atom-simple"></i> GUYI导航站
     </router-link>
     
     <!-- 修改搜索区域显示逻辑 -->
