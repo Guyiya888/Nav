@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关于 GUYI NAV</title>
+<title>关于 GUYI NAV</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 右上角关闭按钮样式 */
+        /* 新增关闭按钮样式 - 简洁版本 */
         .close-btn {
             position: fixed;
             top: 20px;
@@ -18,56 +13,47 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: rgba(243, 244, 246, 0.8); /* 浅灰色半透明 */
+            border: 1px solid rgba(209, 213, 219, 0.5);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
             cursor: pointer;
             z-index: 1000;
-            transition: all 0.2s ease;
+            transition: background 0.2s ease;
         }
         
         .close-btn:hover {
-            background: rgba(255, 255, 255, 1);
-            border-color: rgba(0, 0, 0, 0.2);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .close-btn:hover i {
-            color: #ef4444;
+            background: rgba(229, 231, 235, 0.9);
         }
         
         .close-btn i {
-            color: rgba(0, 0, 0, 0.6);
+            color: #4b5563; /* 灰色 */
             font-size: 18px;
-            transition: color 0.2s ease;
+        }
+        
+        .close-btn:hover i {
+            color: #ef4444; /* 红色 */
         }
         
         /* 暗色模式适配 */
         .dark .close-btn {
-            background: rgba(30, 30, 30, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .dark .close-btn:hover {
-            background: rgba(40, 40, 40, 1);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(31, 41, 55, 0.8); /* 深灰色半透明 */
+            border: 1px solid rgba(55, 65, 81, 0.5);
         }
         
         .dark .close-btn i {
-            color: rgba(255, 255, 255, 0.7);
+            color: #d1d5db; /* 浅灰色 */
         }
         
-        .dark .close-btn:hover i {
-            color: #f87171;
+        .dark .close-btn:hover {
+            background: rgba(55, 65, 81, 0.9);
         }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
-    <!-- 右上角关闭按钮 -->
-    <div class="close-btn" onclick="window.location.href='/'" title="返回主页">
+    <!-- 新增的关闭按钮 -->
+    <div class="close-btn" onclick="window.location.href='/'">
         <i class="fas fa-times"></i>
     </div>
-    
     <!-- 原有页面内容保持不变 -->
     <div class="h-screen flex flex-col">
         <div class="flex flex-1 overflow-hidden relative">
