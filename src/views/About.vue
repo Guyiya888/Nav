@@ -1,13 +1,29 @@
 <template>
   <div class="h-screen flex flex-col">
     <div class="flex flex-1 overflow-hidden relative">
-      <!-- 添加右上角返回按钮 -->
+      <!-- 优化后的Windows风格返回按钮 -->
       <button 
-        class="fixed top-4 right-4 z-10 bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-400 text-white p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-105"
+        class="fixed top-4 right-4 z-10 w-12 h-12 flex items-center justify-center rounded-md backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-white/40 dark:border-gray-600/40 shadow-lg hover:bg-red-500/80 hover:border-red-300 transition-all duration-300 group"
         @click="$router.push('/')"
         title="返回首页"
       >
-        <i class="fas fa-arrow-left text-lg"></i>
+        <!-- Windows风格的关闭图标 -->
+        <div class="relative w-6 h-6 transform group-hover:scale-110 transition-transform duration-200">
+          <!-- 外层透明框 -->
+          <div class="absolute inset-0 border-2 border-gray-600 dark:border-gray-300 rounded-sm opacity-70 group-hover:opacity-0 transition-opacity duration-200"></div>
+          <!-- 关闭叉叉 -->
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <div class="relative w-full h-full">
+              <!-- 叉叉线条1 -->
+              <div class="absolute top-1/2 left-0 w-full h-0.5 bg-white transform -rotate-45 origin-center"></div>
+              <!-- 叉叉线条2 -->
+              <div class="absolute top-1/2 left-0 w-full h-0.5 bg-white transform rotate-45 origin-center"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 悬停时的红色背景效果 -->
+        <div class="absolute inset-0 bg-red-500 rounded-md opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
       </button>
       
       <main class="flex-1 flex flex-col p-4 overflow-y-auto">
