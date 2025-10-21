@@ -1,29 +1,19 @@
 <template>
   <div class="h-screen flex flex-col">
     <div class="flex flex-1 overflow-hidden relative">
-      <!-- 优化后的Windows风格返回按钮 -->
+      <!-- 简化后的返回按钮 - 只有浅色打叉 -->
       <button 
-        class="fixed top-4 right-4 z-10 w-12 h-12 flex items-center justify-center rounded-md backdrop-blur-md bg-white/30 dark:bg-gray-800/30 border border-white/40 dark:border-gray-600/40 shadow-lg hover:bg-red-500/80 hover:border-red-300 transition-all duration-300 group"
+        class="fixed top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-md transition-all duration-300 group"
         @click="$router.push('/')"
         title="返回首页"
       >
-        <!-- Windows风格的关闭图标 -->
+        <!-- 简单的打叉图标 -->
         <div class="relative w-6 h-6 transform group-hover:scale-110 transition-transform duration-200">
-          <!-- 外层透明框 -->
-          <div class="absolute inset-0 border-2 border-gray-600 dark:border-gray-300 rounded-sm opacity-70 group-hover:opacity-0 transition-opacity duration-200"></div>
-          <!-- 关闭叉叉 -->
-          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            <div class="relative w-full h-full">
-              <!-- 叉叉线条1 -->
-              <div class="absolute top-1/2 left-0 w-full h-0.5 bg-white transform -rotate-45 origin-center"></div>
-              <!-- 叉叉线条2 -->
-              <div class="absolute top-1/2 left-0 w-full h-0.5 bg-white transform rotate-45 origin-center"></div>
-            </div>
-          </div>
+          <!-- 叉叉线条1 -->
+          <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-400 dark:bg-gray-500 transform -rotate-45 origin-center group-hover:bg-red-500 transition-colors duration-200"></div>
+          <!-- 叉叉线条2 -->
+          <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-400 dark:bg-gray-500 transform rotate-45 origin-center group-hover:bg-red-500 transition-colors duration-200"></div>
         </div>
-        
-        <!-- 悬停时的红色背景效果 -->
-        <div class="absolute inset-0 bg-red-500 rounded-md opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
       </button>
       
       <main class="flex-1 flex flex-col p-4 overflow-y-auto">
