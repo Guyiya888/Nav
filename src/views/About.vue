@@ -1,6 +1,15 @@
 <template>
   <div class="h-screen flex flex-col">
     <div class="flex flex-1 overflow-hidden relative">
+      <!-- 添加右上角返回按钮 -->
+      <button 
+        class="fixed top-4 right-4 z-10 bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-400 text-white p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-105"
+        @click="$router.push('/')"
+        title="返回首页"
+      >
+        <i class="fas fa-arrow-left text-lg"></i>
+      </button>
+      
       <main class="flex-1 flex flex-col p-4 overflow-y-auto">
         <div class="flex-grow max-w-5xl mx-auto w-full">
           <h1 
