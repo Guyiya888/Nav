@@ -3,7 +3,7 @@
     <div class="flex flex-1 overflow-hidden relative">
       <!-- 简化后的返回按钮 - 只有浅色打叉 -->
       <button 
-        class="fixed top-2 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-md transition-all duration-300 group"
+        class="fixed top-0 right-0 z-10 w-10 h-10 flex items-center justify-center rounded-md transition-all duration-300 group"
         @click="$router.push('/')"
         title="返回首页"
       >
