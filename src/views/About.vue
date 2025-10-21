@@ -128,7 +128,7 @@
                             <h3 class="text-xl font-semibold mb-2">关于作者</h3>
                             <div class="text-gray-600 dark:text-gray-300 space-y-2">
                                 <p>🕴 开发：</p>
-                                <p>🚀</p>
+                                <p>🚀1</p>
                                 <p>🏠 个人主页： <a href="#" target="_blank" class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 underline">GUYI@</a></p>
                                 <p>🌐 个人博客： <a href="#" target="_blank" class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 underline">博客</a></p>
                                 <p>💰 另一网页： <a href="https://baidu.com" target="_blank" class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 underline">打赏页面</a></p>
