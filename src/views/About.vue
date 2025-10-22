@@ -2,7 +2,7 @@
   <div class="h-screen flex flex-col">
     <!-- 将返回按钮放在最外层，确保它不会被任何元素覆盖 -->
     <button 
-      class="fixed top-2 right-2 z-50 w-10 h-10 flex items-center justify-center rounded-md transition-all duration-300 group"
+      class="fixed top-0 right-2 z-50 w-10 h-10 flex items-center justify-center rounded-md transition-all duration-300 group"
       @click="$router.push('/')"
       title="返回首页"
     >
