@@ -1,21 +1,21 @@
 <template>
   <div class="h-screen flex flex-col">
+    <!-- 将返回按钮放在最外层，确保它不会被任何元素覆盖 -->
+    <button 
+      class="fixed top-2 right-2 z-50 w-10 h-10 flex items-center justify-center rounded-md transition-all duration-300 group"
+      @click="$router.push('/')"
+      title="返回首页"
+    >
+      <!-- 简单的打叉图标 -->
+      <div class="relative w-6 h-6 transform group-hover:scale-110 transition-transform duration-200">
+        <!-- 叉叉线条1 -->
+        <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-400 dark:bg-gray-500 transform -rotate-45 origin-center group-hover:bg-red-500 transition-colors duration-200"></div>
+        <!-- 叉叉线条2 -->
+        <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-400 dark:bg-gray-500 transform rotate-45 origin-center group-hover:bg-red-500 transition-colors duration-200"></div>
+      </div>
+    </button>
+    
     <div class="flex flex-1 overflow-hidden relative">
-      <!-- 简化后的返回按钮 - 只有浅色打叉 -->
-      <button 
-        class="fixed top-0 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-md transition-all duration-300 group"
-        @click="$router.push('/')"
-        title="返回首页"
-      >
-        <!-- 简单的打叉图标 -->
-        <div class="relative w-6 h-6 transform group-hover:scale-110 transition-transform duration-200">
-          <!-- 叉叉线条1 -->
-          <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-400 dark:bg-gray-500 transform -rotate-45 origin-center group-hover:bg-red-500 transition-colors duration-200"></div>
-          <!-- 叉叉线条2 -->
-          <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-400 dark:bg-gray-500 transform rotate-45 origin-center group-hover:bg-red-500 transition-colors duration-200"></div>
-        </div>
-      </button>
-      
       <main class="flex-1 flex flex-col p-4 overflow-y-auto">
         <div class="flex-grow max-w-5xl mx-auto w-full">
           <h1 
