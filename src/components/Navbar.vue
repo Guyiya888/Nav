@@ -168,7 +168,7 @@ export default {
       // 城市选择相关
       showCitySelector: false,
       cityInput: '',
-      popularCities: ['北京', '上海', '广州', '深圳', '杭州', '成都', '武汉', '南京', '西安']
+      popularCities: ['北京', '北海', '南宁', '广州', '深圳', '成都', '武汉', '上海', '西安']
     };
   },
   computed: {
