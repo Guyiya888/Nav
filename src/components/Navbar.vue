@@ -52,7 +52,7 @@
         <i class="fas fa-search"></i>  <!-- 使用Font Awesome的搜索图标 -->
       </button>
       
-      <!-- 右侧天气显示 -->
+      <!-- 右侧天气显示（使用模拟数据） -->
       <div class="weather-display flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-1 min-w-[140px]">
         <i class="fas text-lg mr-2" :class="weatherIcon"></i>
         <div class="weather-info flex flex-col">
@@ -92,8 +92,8 @@
 </template>
 
 <script>
-// 引入axios用于API调用
-import axios from 'axios';
+// 移除axios导入，使用模拟数据
+// import axios from 'axios';
 
 export default {
   props: ['darkMode'],
@@ -134,30 +134,22 @@ export default {
       currentTime: '00:00:00',
       currentDate: '1月1日 星期一',
       weather: {
-        temp: '--',
-        desc: '加载中...'
+        temp: '24',
+        desc: '晴朗'
       },
       weatherTimer: null,
-      timeTimer: null,
-      // 天气API配置
-      weatherConfig: {
-        apiKey: 'b3ac86e464ba40f58fdee7f3eaa8ea13', // 替换为您的和风天气API Key
-        location: 'auto_ip', // 自动获取IP所在地，或指定城市ID如"101010100"(北京)
-        apiUrl: 'https://devapi.qweather.com/v7/weather/now' // 和风天气API地址
-      }
+      timeTimer: null
     };
   },
   computed: {
-    // 根据天气代码返回对应的图标
+    // 根据天气描述返回对应的图标
     weatherIcon() {
-      const code = this.weather.code;
-      // 和风天气代码映射
-      if ([100, 101, 102, 103].includes(code)) return 'fa-sun text-yellow-500'; // 晴
-      if ([104, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 399].includes(code)) return 'fa-cloud text-gray-400'; // 阴/多云
-      if ([400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410].includes(code)) return 'fa-cloud-rain text-blue-400'; // 雨
-      if ([499, 500, 501, 502, 503, 504, 507, 508].includes(code)) return 'fa-snowflake text-blue-200'; // 雪
-      if ([999].includes(code)) return 'fa-question text-gray-400'; // 未知
-      return 'fa-cloud text-gray-400'; // 默认
+      const desc = this.weather.desc.toLowerCase();
+      if (desc.includes('晴')) return 'fa-sun text-yellow-500';
+      if (desc.includes('云')) return 'fa-cloud text-gray-400';
+      if (desc.includes('雨')) return 'fa-cloud-rain text-blue-400';
+      if (desc.includes('雪')) return 'fa-snowflake text-blue-200';
+      return 'fa-cloud text-gray-400';
     }
   },
   methods: {
@@ -188,51 +180,19 @@ export default {
       
       this.currentDate = `${month}月${day}日 ${weekday}`;
     },
-    // 新增方法：获取位置信息
-    async getLocation() {
-      try {
-        // 使用IP定位获取城市信息
-        const response = await axios.get(`https://geoapi.qweather.com/v2/city/ip?key=${this.weatherConfig.apiKey}&ip=auto`);
-        if (response.data.code === '200') {
-          return response.data.location[0].id; // 返回城市ID
-        }
-      } catch (error) {
-        console.error('获取位置失败:', error);
-      }
-      return '101010100'; // 默认北京
-    },
-    // 新增方法：获取天气数据（真实API）
-    async getWeatherData() {
-      try {
-        // 获取位置信息
-        const locationId = await this.getLocation();
-        
-        // 调用和风天气API
-        const response = await axios.get(`${this.weatherConfig.apiUrl}?key=${this.weatherConfig.apiKey}&location=${locationId}`);
-        
-        if (response.data.code === '200') {
-          const weatherData = response.data.now;
-          this.weather = {
-            temp: weatherData.temp,
-            desc: weatherData.text,
-            code: parseInt(weatherData.icon)
-          };
-        } else {
-          console.error('天气API返回错误:', response.data);
-          this.weather = {
-            temp: '--',
-            desc: '获取失败',
-            code: 999
-          };
-        }
-      } catch (error) {
-        console.error('获取天气数据失败:', error);
-        this.weather = {
-          temp: '--',
-          desc: '网络错误',
-          code: 999
-        };
-      }
+    // 修改方法：使用模拟天气数据（不调用API）
+    getWeatherData() {
+      // 使用模拟数据，避免API调用
+      const weatherConditions = [
+        { temp: 24, desc: '晴朗' },
+        { temp: 18, desc: '多云' },
+        { temp: 15, desc: '小雨' },
+        { temp: 22, desc: '局部多云' }
+      ];
+      
+      // 随机选择一个天气条件（模拟天气变化）
+      const randomWeather = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+      this.weather = randomWeather;
     }
   },
   mounted() {
@@ -244,13 +204,13 @@ export default {
       this.updateTime();
     }, 1000);
     
-    // 获取天气数据
+    // 获取天气数据（使用模拟数据）
     this.getWeatherData();
     
-    // 设置定时器，每30分钟更新一次天气
+    // 设置定时器，每10分钟更新一次天气（模拟）
     this.weatherTimer = setInterval(() => {
       this.getWeatherData();
-    }, 1800000); // 30分钟
+    }, 600000); // 10分钟
   },
   beforeUnmount() {
     // 清除定时器
