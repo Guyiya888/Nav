@@ -627,7 +627,7 @@
                             const locationId = cityData.location[0].id;
                             
                             // 获取天气数据
-                            const weatherResponse = await fetch(`https://devapi.qweather.com/v7/weather/now?key=${b3ac86e464ba40f58fdee7f3eaa8ea13}&location=${locationId}`);
+                            const weatherResponse = await fetch(`https://devapi.qweather.com/v7/weather/now?key=${API_KEY}&location=${locationId}`);
                             const weatherData = await weatherResponse.json();
                             
                             if (weatherData.code === '200') {
