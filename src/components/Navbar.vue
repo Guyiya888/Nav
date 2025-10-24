@@ -5,8 +5,14 @@
       <i class="fas fa-atom"></i> GUYI导航站
     </router-link>
     
-    <!-- 修改搜索区域显示逻辑 -->
+    <!-- 修改搜索区域显示逻辑，添加时间和天气 -->
     <div class="hidden md:flex items-center gap-2 flex-1 max-w-2xl mx-4">
+      <!-- 左侧时间显示 -->
+      <div class="time-display flex flex-col items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-1 min-w-[140px]">
+        <div class="time text-sm font-semibold">{{ currentTime }}</div>
+        <div class="date text-xs text-gray-500 dark:text-gray-400">{{ currentDate }}</div>
+      </div>
+      
       <div class="relative">
         <!-- 调整当前选择项的宽度和图标间距 -->
         <a href="javascript:;" 
@@ -45,6 +51,15 @@
       >
         <i class="fas fa-search"></i>  <!-- 使用Font Awesome的搜索图标 -->
       </button>
+      
+      <!-- 右侧天气显示 -->
+      <div class="weather-display flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-1 min-w-[140px]">
+        <i class="fas text-lg mr-2" :class="weatherIcon"></i>
+        <div class="weather-info flex flex-col">
+          <div class="weather-temp text-sm font-semibold">{{ weather.temp }}°C</div>
+          <div class="weather-desc text-xs text-gray-500 dark:text-gray-400">{{ weather.desc }}</div>
+        </div>
+      </div>
     </div>
     
     <!-- 右侧按钮区域 -->
@@ -111,8 +126,28 @@ export default {
         baidu: 'fas fa-paw',
         google: 'fab fa-google', 
         local: 'fas fa-search'
-      }
+      },
+      // 新增时间和天气相关数据
+      currentTime: '00:00:00',
+      currentDate: '2023年1月1日',
+      weather: {
+        temp: '24',
+        desc: '晴朗'
+      },
+      weatherTimer: null,
+      timeTimer: null
     };
+  },
+  computed: {
+    // 根据天气描述返回对应的图标
+    weatherIcon() {
+      const desc = this.weather.desc.toLowerCase();
+      if (desc.includes('晴')) return 'fa-sun text-yellow-500';
+      if (desc.includes('云')) return 'fa-cloud text-gray-400';
+      if (desc.includes('雨')) return 'fa-cloud-rain text-blue-400';
+      if (desc.includes('雪')) return 'fa-snowflake text-blue-200';
+      return 'fa-cloud text-gray-400';
+    }
   },
   methods: {
     search() {
@@ -128,7 +163,88 @@ export default {
           window.open(url, '_blank');
         }
       }
+    },
+    // 新增方法：更新时间
+    updateTime() {
+      const now = new Date();
+      this.currentTime = now.toLocaleTimeString('zh-CN');
+      this.currentDate = now.toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    },
+    // 新增方法：获取天气数据（模拟）
+    getWeatherData() {
+      // 这里应该是调用天气API的代码
+      // 由于是示例，我们使用模拟数据
+      const weatherConditions = [
+        { temp: 24, desc: '晴朗' },
+        { temp: 18, desc: '多云' },
+        { temp: 15, desc: '小雨' },
+        { temp: 22, desc: '局部多云' }
+      ];
+      
+      // 随机选择一个天气条件（模拟天气变化）
+      const randomWeather = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+      this.weather = randomWeather;
     }
+  },
+  mounted() {
+    // 初始化时间
+    this.updateTime();
+    
+    // 设置定时器，每秒更新时间
+    this.timeTimer = setInterval(() => {
+      this.updateTime();
+    }, 1000);
+    
+    // 获取天气数据
+    this.getWeatherData();
+    
+    // 设置定时器，每10分钟更新一次天气（模拟）
+    this.weatherTimer = setInterval(() => {
+      this.getWeatherData();
+    }, 600000); // 10分钟
+  },
+  beforeUnmount() {
+    // 清除定时器
+    if (this.timeTimer) clearInterval(this.timeTimer);
+    if (this.weatherTimer) clearInterval(this.weatherTimer);
   }
 };
 </script>
+
+<style scoped>
+/* 原有的样式保持不变 */
+
+/* 新增时间和天气样式 */
+.time-display, .weather-display {
+  transition: all 0.3s ease;
+}
+
+.time-display:hover, .weather-display:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dark .time-display:hover, .dark .weather-display:hover {
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .time-display, .weather-display {
+    min-width: 120px;
+    font-size: 0.8rem;
+  }
+  
+  .time, .weather-temp {
+    font-size: 0.9rem;
+  }
+  
+  .date, .weather-desc {
+    font-size: 0.7rem;
+  }
+}
+</style>
