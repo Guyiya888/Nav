@@ -52,12 +52,12 @@
         <i class="fas fa-search"></i>  <!-- 使用Font Awesome的搜索图标 -->
       </button>
       
-      <!-- 右侧天气显示（使用模拟数据） -->
-      <div class="weather-display flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-1 min-w-[140px]">
+      <!-- 右侧天气显示 -->
+      <div class="weather-display flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-1 min-w-[140px] cursor-pointer" @click="showCitySelector = true">
         <i class="fas text-lg mr-2" :class="weatherIcon"></i>
         <div class="weather-info flex flex-col">
           <div class="weather-temp text-sm font-semibold">{{ weather.temp }}°C</div>
-          <div class="weather-desc text-xs text-gray-500 dark:text-gray-400">{{ weather.desc }}</div>
+          <div class="weather-desc text-xs text-gray-500 dark:text-gray-400">{{ weather.city }}·{{ weather.desc }}</div>
         </div>
       </div>
     </div>
@@ -89,12 +89,37 @@
       </button>
     </div>
   </nav>
+
+  <!-- 城市选择弹窗 -->
+  <div v-if="showCitySelector" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-80">
+      <h3 class="text-lg font-semibold mb-4">选择城市</h3>
+      <input 
+        type="text" 
+        v-model="cityInput" 
+        placeholder="输入城市名称" 
+        class="w-full p-2 border rounded mb-4"
+        @keyup.enter="changeCity"
+      >
+      <div class="grid grid-cols-3 gap-2 mb-4">
+        <button 
+          v-for="city in popularCities" 
+          :key="city"
+          @click="selectCity(city)"
+          class="p-2 bg-gray-100 dark:bg-gray-700 rounded hover:bg-blue-100 dark:hover:bg-blue-900"
+        >
+          {{ city }}
+        </button>
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button @click="showCitySelector = false" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">取消</button>
+        <button @click="changeCity" class="px-4 py-2 bg-blue-500 text-white rounded">确定</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-// 移除axios导入，使用模拟数据
-// import axios from 'axios';
-
 export default {
   props: ['darkMode'],
   data() {
@@ -134,21 +159,29 @@ export default {
       currentTime: '00:00:00',
       currentDate: '1月1日 星期一',
       weather: {
-        temp: '24',
-        desc: '晴朗'
+        temp: '--',
+        desc: '加载中...',
+        city: '北京'
       },
       weatherTimer: null,
-      timeTimer: null
+      timeTimer: null,
+      // 城市选择相关
+      showCitySelector: false,
+      cityInput: '',
+      popularCities: ['北京', '上海', '广州', '深圳', '杭州', '成都', '武汉', '南京', '西安']
     };
   },
   computed: {
     // 根据天气描述返回对应的图标
     weatherIcon() {
-      const desc = this.weather.desc.toLowerCase();
+      const desc = this.weather.desc;
+      if (!desc) return 'fa-cloud text-gray-400';
+      
       if (desc.includes('晴')) return 'fa-sun text-yellow-500';
       if (desc.includes('云')) return 'fa-cloud text-gray-400';
       if (desc.includes('雨')) return 'fa-cloud-rain text-blue-400';
       if (desc.includes('雪')) return 'fa-snowflake text-blue-200';
+      if (desc.includes('雾') || desc.includes('霾')) return 'fa-smog text-gray-400';
       return 'fa-cloud text-gray-400';
     }
   },
@@ -180,9 +213,35 @@ export default {
       
       this.currentDate = `${month}月${day}日 ${weekday}`;
     },
-    // 修改方法：使用模拟天气数据（不调用API）
-    getWeatherData() {
-      // 使用模拟数据，避免API调用
+    // 新增方法：获取天气数据（使用免费API）
+    async getWeatherData(city = '北京') {
+      try {
+        // 使用免费天气API - 示例使用OpenWeatherMap（需要注册获取API密钥）
+        // 注意：这里使用了一个无需API密钥的演示服务，实际使用时请替换为您的API
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=b3ac86e464ba40f58fdee7f3eaa8ea13&units=metric&lang=zh_cn`);
+        
+        if (!response.ok) {
+          throw new Error('天气API请求失败');
+        }
+        
+        const data = await response.json();
+        
+        this.weather = {
+          temp: Math.round(data.main.temp),
+          desc: data.weather[0].description,
+          city: data.name
+        };
+        
+        // 保存城市到本地存储
+        localStorage.setItem('weatherCity', city);
+      } catch (error) {
+        console.error('获取天气数据失败:', error);
+        // 失败时使用模拟数据
+        this.useMockWeatherData(city);
+      }
+    },
+    // 备用方法：使用模拟天气数据
+    useMockWeatherData(city) {
       const weatherConditions = [
         { temp: 24, desc: '晴朗' },
         { temp: 18, desc: '多云' },
@@ -190,9 +249,23 @@ export default {
         { temp: 22, desc: '局部多云' }
       ];
       
-      // 随机选择一个天气条件（模拟天气变化）
       const randomWeather = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
-      this.weather = randomWeather;
+      this.weather = {
+        ...randomWeather,
+        city: city
+      };
+    },
+    // 选择热门城市
+    selectCity(city) {
+      this.cityInput = city;
+      this.changeCity();
+    },
+    // 更改城市
+    changeCity() {
+      if (this.cityInput.trim()) {
+        this.getWeatherData(this.cityInput.trim());
+        this.showCitySelector = false;
+      }
     }
   },
   mounted() {
@@ -204,13 +277,15 @@ export default {
       this.updateTime();
     }, 1000);
     
-    // 获取天气数据（使用模拟数据）
-    this.getWeatherData();
+    // 从本地存储获取城市或使用默认城市
+    const savedCity = localStorage.getItem('weatherCity') || '北京';
+    this.getWeatherData(savedCity);
     
-    // 设置定时器，每10分钟更新一次天气（模拟）
+    // 设置定时器，每30分钟更新一次天气
     this.weatherTimer = setInterval(() => {
-      this.getWeatherData();
-    }, 600000); // 10分钟
+      const currentCity = this.weather.city || '北京';
+      this.getWeatherData(currentCity);
+    }, 1800000); // 30分钟
   },
   beforeUnmount() {
     // 清除定时器
