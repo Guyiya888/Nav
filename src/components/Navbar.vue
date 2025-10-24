@@ -165,14 +165,17 @@ export default {
       }
     },
     // 新增方法：更新时间
-    updateTime() {
+ updateTime() {
       const now = new Date();
       this.currentTime = now.toLocaleTimeString('zh-CN');
-      this.currentDate = now.toLocaleDateString('zh-CN', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
+      
+      // 格式化日期：月日 星期（不显示年份）
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+      const weekday = weekdays[now.getDay()];
+      
+      this.currentDate = `${month}月${day}日 ${weekday}`;
     },
     // 新增方法：获取天气数据（模拟）
     getWeatherData() {
